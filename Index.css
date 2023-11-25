@@ -1,46 +1,54 @@
-* {
-    box-sizing: border-box;
-}
-
 body {
-    width: 100%;
-    height: 100%;
-    font-family: 'Roboto', sans-serif;
-    background-color: rgb(217, 205, 220);
+    display: flex;
+    justify-content: center;
+
 }
 
-main {
+h1 {
+    color: rgb(130, 42, 165);
+}
+
+.Game {
+    display: flex;
+    flex-direction: column;
+    width: 22rem;
+    height: 27rem;
+    background: rgb(215, 240, 211);
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    margin-top: 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
-    gap: 2rem;
+    gap: 0.6rem;
+    background: rgb(167, 204, 236);
+    width: 70%;
+    height: 38%;
+    border-radius: 8px;
 }
 
-input {
-    width: 80%;
-    margin-bottom: 1rem;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
+form #guess {
+    color: rgb(226, 26, 26);
+    font-size: 1.8rem;
+    font-weight: 800;
 }
 
-.transformed-output {
-    width: 80%;
-    font-size: 1.2rem;
-    padding: 0.5rem 1rem;
-    background-color: rgb(28, 149, 236);
-    position: relative;
-    color: rgb(80, 5, 79);
+#submit {
+    color: rgb(14, 20, 42);
+    background: rgb(247, 0, 255);
+    border: none;
+    border-radius: 3px;
+    padding: 4px;
+    cursor: pointer;
 }
 
-.transformed-output label {
-    font-size: 0.75rem;
-    background-color: black;
-    color: white;
-    top: -0.75rem;
-    padding: 0.25rem;
-    left: 1rem;
-    position: absolute;
+#guessField {
+    outline: none;
+    border: none;
+    background: white;
+    padding: 3px;
 }

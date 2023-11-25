@@ -5,43 +5,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>String Transformers</title>
+    <title>Number Guessing Game</title>
     <link rel="stylesheet" href="Index.css">
     <script src="Index.js" defer></script>
 </head>
 
 <body>
-    <main>
-        <input type="text" placeholder="Enter the sentence with spaces(alphanumeric)">
-        <div class="transformed-output" id="lowercase">
-            <label for="">Lower Case</label>
-            <span></span>
+    <div class="Game">
+        <h1>Number Guessing Game</h1>
+        <span>Try and Guess a random number between 1 and 100.</span>
+        <span>You have 10 attempts to guess the right number.</span>
+        <form action="">
+            <label for="guessField" id="guess">Guess a Number</label>
+            <input type="text" id="guessField">
+            <input type="submit" id="submit" value="Submit Guess">
+        </form>
+        <div class="resultPress">
+            <p>Previous Guesses:<span class="guesses"></span></p>
+            <p>Guesses Remaining:<span class="lastResult"> 10</span></p>
+            <p class="lowOrHi"></p>
         </div>
-        <div class="transformed-output" id="uppercase">
-            <label for="">Upper Case</label>
-            <span></span>
-        </div>
-        <div class="transformed-output" id="camelcase">
-            <label for="">Camel Case</label>
-            <span></span>
-        </div>
-        <div class="transformed-output" id="pascalcase">
-            <label for="">Pascal Case</label>
-            <span></span>
-        </div>
-        <div class="transformed-output" id="snakecase">
-            <label for="">Snake Case</label>
-            <span></span>
-        </div>
-        <div class="transformed-output" id="kebabcase">
-            <label for="">Kebab Case</label>
-            <span></span>
-        </div>
-        <div class="transformed-output" id="trim">
-            <label for="">Trim</label>
-            <span></span>
-        </div>
-    </main>
+    </div>
 </body>
 
 </html>

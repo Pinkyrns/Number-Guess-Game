@@ -1,49 +1,90 @@
-const input = document.querySelector('input');
-const lowerCaseOutput = document.querySelector('#lowercase span');
-const upperCaseOutput = document.querySelector('#uppercase span');
-const camelCaseOutput = document.querySelector('#camelcase span');
-const pascalCaseOutput = document.querySelector('#pascalcase span');
-const snakeCaseOutput = document.querySelector('#snakecase span');
-const kebabCaseOutput = document.querySelector('#kebabcase span');
-const trimOutput = document.querySelector('#trim span');
-function capitalizeString(str) {
-    if(!str)
-    return str;
-    return str[0]?.toUpperCase() + str.slice(1, str.length);
+let RandomNumber = Math.floor((Math.random() * 99) + 1);
+const GuessField = document.querySelector("#guessField");
+const Submit = document.querySelector("#submit");
+const Guesses = document.querySelector(".guesses");
+const lastResult = document.querySelector(".lastResult");
+const lowOrHi = document.querySelector(".lowOrHi");
+const resultPress = document.querySelector(".resultPress");
+
+
+const Para = document.createElement('p');
+
+let prevGuess = [];
+let numGuess = 1;
+let playgame = true;
+if (playgame) {
+    Submit.addEventListener('click', function (e) {
+        e.preventDefault();
+        const Guess = parseInt(GuessField.value);
+        validateGuess(Guess);
+
+    });
 }
-function camelCase(string) {
-    const lowercaseString = string.toLowerCase();
-    const wordsArray = lowercaseString.split(" ");
-    const finalArray = wordsArray.map((word, i) => {
-        if (i === 0) return word;
-        return capitalizeString(word);
+function validateGuess(Guess) {
+    if (isNaN(Guess)) {
+        alert("Please enter a valid number");
+    }
+    else if (Guess < 1) {
+        alert("Please enter a number more than 1");
+    }
+    else if (Guess > 100) {
+        alert("Please enter a number less than 100");
+    }
+    else {
+        prevGuess.push(Guess);
+        if (numGuess === 11) {
+            displayMessage(`Game Over .Random number was ${RandomNumber} `);
+            endGame();
+        }
+        else {
+            displayGuess(Guess);
+            checkGuess(Guess)
+        }
+    }
+}
+
+function checkGuess(Guess) {
+    if (Guess === RandomNumber) {
+        displayMessage(`You guessed it right`);
+        endGame()
+    } else if (Guess < RandomNumber) {
+        displayMessage(`Number is TOOO low`)
+    }
+    else if (Guess > RandomNumber) {
+        displayMessage(`Number is TOOO High`)
+    }
+}
+function displayGuess(Guess) {
+    GuessField.value = '';
+    Guesses.innerHTML += `${Guess},  `;
+    numGuess++;
+    lastResult.innerHTML = `${11 - numGuess}`;
+}
+
+function displayMessage(message) {
+    lowOrHi.innerHTML = `<p>${message}</p>`;
+}
+
+function endGame() {
+    GuessField.value = '';
+    GuessField.setAttribute('disabled', '');
+    Para.classList.add('button');
+    Para.innerHTML = `<h2 id="newGame">Start new Game</h2>`;
+    resultPress.append(Para);
+    playgame = false;
+    newGame();
+}
+function newGame() {
+    const newGameButton = document.querySelector('#newGame');
+    newGameButton.addEventListener('click', function (e) {
+        RandomNumber = Math.floor((Math.random() * 99) + 1);
+        prevGuess = [];
+        numGuess = 1;
+        Guesses.innerHTML = '';
+        lowOrHi.innerHTML = '';
+        lastResult.innerHTML = `${11 - numGuess}`;
+        GuessField.removeAttribute('disabled');
+        resultPress.removeChild(Para);
+        playgame = true;
     })
-    return finalArray.join('');
 }
-function pascalCase(string) {
-    const lowercaseString = string.toLowerCase();
-    const wordsArray = lowercaseString.split(" ");
-    const finalArray = wordsArray.map((word) => {
-        return capitalizeString(word);
-    })
-    return finalArray.join('');
-}
-function snakeCase(string) {
-    return string.replaceAll(' ', '-');
-}
-function kebabCase(string) {
-    return string.replaceAll(' ', '_');
-}
-function trimCase(string) {
-    return string.replaceAll(' ', '');
-}
-console.log(camelCase("I am pinky"));
-input.addEventListener('input', (e) => {
-    lowerCaseOutput.innerText = input.value.toLowerCase();
-    upperCaseOutput.innerText = input.value.toUpperCase();
-    camelCaseOutput.innerText = camelCase(input.value);
-    pascalCaseOutput.innerText = pascalCase(input.value);
-    snakeCaseOutput.innerText = snakeCase(input.value);
-    kebabCaseOutput.innerText = kebabCase(input.value);
-    trimOutput.innerText = trimCase(input.value);
-})
